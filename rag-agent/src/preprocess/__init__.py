@@ -5,3 +5,4 @@ from .filter_low_quality import is_low_quality
 from .detect_duplicates import detect_duplicates
 from .remove_boilerplate import remove_boilerplate
 from .extract_main_paragraphs import extract_main_paragraphs
+from .handle_special_content import handle_special_content
