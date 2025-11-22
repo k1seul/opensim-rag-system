@@ -6,9 +6,8 @@ from src.preprocess import (
     extract_metadata,
     is_low_quality,
     detect_duplicates,
-    remove_boilerplate,
-    extract_main_paragraphs,
 )
+from src.preprocess.handle_special_content import handle_special_content  # 함수만 import
 
 RAW_DIR = "./data/raw"
 PROCESSED_DIR = "./data/processed"
@@ -36,19 +35,20 @@ def main():
 
     cleaned_docs = []
     for d in raw_docs:
-        text_cleaned = clean_text(d["text"])
-        text_cleaned = remove_boilerplate(text_cleaned)
-        text_main = extract_main_paragraphs(text_cleaned)
+        cleaned = clean_text(d["text"])
+        
+        # 특수 콘텐츠 처리 (코드, 표, 수식 등)
+        cleaned = handle_special_content({"content": cleaned})["content"]
 
         meta = extract_metadata(d["text"])
 
-        if is_low_quality(text_main):
+        if is_low_quality(cleaned):
             continue
 
         normalized = normalize_doc(
             doc_id=d["id"],
             source="raw_source",
-            content=text_main,
+            content=cleaned,
             metadata=meta,
         )
         cleaned_docs.append(normalized)
