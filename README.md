@@ -47,9 +47,9 @@ RAG implementation for OpenSim documentation
 
 | 체크리스트 | 상태 |
 |-----------|------|
-| [ ] Vector DB 선택 (FAISS / Pinecone / Milvus 등) |
-| [ ] 벡터 삽입 및 검색 설정 (Top-k) |
-| [ ] 증분 업데이트 가능하도록 구성 |
+| [x] Vector DB 선택 (FAISS / Pinecone / Milvus 등) |
+| [x] 벡터 삽입 및 검색 설정 (Top-k) |
+| [x] 증분 업데이트 가능하도록 구성 |
 
 > **결과:** 검색 가능한 벡터 DB 구성 완료
 
@@ -60,7 +60,7 @@ RAG implementation for OpenSim documentation
 | 체크리스트 | 상태 |
 |-----------|------|
 | [ ] Rewriter → Retriever → Generator Pipeline 구성 |
-| [ ] Context 설정 (max token, score threshold) |
+| [x] Context 설정 (max token, score threshold) |
 | [ ] 시스템/도메인 프롬프트 작성 |
 | [ ] 검색 후 생성 테스트 (샘플 질의) |
 | [ ] 성능/정확도 간단 검증 |
