@@ -205,14 +205,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-#data
-rag_agent/data/preprocessd
-rag_agent/data/raw
-# .gitignore
-data/processed/
-rag-agent/data/processed/
-rag-agent/data/raw/
-rag-agent/data/chunks/
-rag-agent/data/embeddings/
-
