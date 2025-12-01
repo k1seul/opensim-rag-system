@@ -22,9 +22,22 @@ def main():
     print("[INFO] Loading embeddings...")
     docs = load_embeddings(EMBEDDINGS_FILE)
 
-    print("[INFO] Creating FAISS vector store with HuggingFace embeddings...")
+    print("[INFO] Initializing embedding model...")
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = FAISS.from_documents(docs, embedding_model)
+
+    # 기존 vectorstore가 있으면 불러오기
+    if os.path.exists(VECTORSTORE_FILE):
+        print("[INFO] Loading existing FAISS vector store...")
+        vectorstore = FAISS.load_local(
+            VECTORSTORE_FILE,
+            embedding_model,
+            allow_dangerous_deserialization=True  # <- 안전하므로 허용
+        )
+        print("[INFO] Adding new documents to existing vector store...")
+        vectorstore.add_documents(docs)
+    else:
+        print("[INFO] Creating new FAISS vector store...")
+        vectorstore = FAISS.from_documents(docs, embedding_model)
 
     print(f"[INFO] Saving vector store to {VECTORSTORE_FILE}...")
     vectorstore.save_local(VECTORSTORE_FILE)
