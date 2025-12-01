@@ -1,127 +1,68 @@
 # Opensim RAG System for BKMS 2025-FALL Project
 
-RAG implementation for opensim documentation
+RAG implementation for OpenSim documentation
 
-# 🧠 RAG Agent 구축 체크리스트
+## 🧠 RAG Agent 구축 체크리스트 (간소화)
 
-> 데이터 수집부터 검색 증강 생성(RAG) 에이전트까지 단계별 구축 가이드  
-> 포함 기능: **데이터 수집 · 전처리 · 청킹 · 임베딩 · 벡터스토어 · 쿼리 재작성 · RAG Agent**
+> 데이터 수집부터 검색 증강 생성(RAG) 에이전트까지
 
 ---
 
-## 📌 1. 데이터 수집 (Data Collection)
+## 1️⃣ 데이터 수집 & 전처리
 
 | 체크리스트 | 상태 |
 |-----------|------|
-| [x] 데이터 출처 정의 (웹, API, 파일, DB 등) |
-| [x] 접근 권한 확인 및 라이선스 검토 |
-| [x] 스크래핑/다운로드/크롤링 방식 선택 |
-| [x] 원본 데이터 저장 경로 지정 (`/data/raw/`) |
-| [x] 메타데이터 포함 여부 확인 (URL, 시간, 파일명 등) |
-| [x] 증분 업데이트 전략 수립 (새 데이터만 수집) |
+| [x] 데이터 출처 정의 및 접근 권한 확인 |
+| [x] 원본 데이터 저장 (`/data/raw/`) |
+| [x] 텍스트 클린업 (HTML, 특수문자, 코드/표/수식 처리) |
+| [x] 중복 제거 및 메타데이터 포함 |
+| [x] 전처리 완료 후 `/data/processed/` 저장 |
 
-> **결과:** `/data/raw/` 디렉토리에 원본 데이터 저장
+> **결과:** 깨끗한 텍스트와 메타데이터 확보
 
 ---
 
-## 🧹 2. 데이터 전처리 (Preprocessing)
+## 2️⃣ 청킹 (Chunking)
 
 | 체크리스트 | 상태 |
 |-----------|------|
-| [x] 텍스트 클린업 (HTML 태그, 특수문자 제거) |
-| [x] 문장/단락 단위 분리 |
-| [x] 중복 제거 |
-| [x] 불필요한 헤더/푸터 제거 |
-| [x] 언어 감지 및 인코딩 검증 |
-| [x] 표/코드/수식 처리 방식 결정 |
-
-> **결과:** `/data/processed/` 디렉토리 저장
+| [x] Chunk size & Overlap 결정 (권장: 300~1000 tokens / 20~30%) |
+| [x] 문맥 단위 유지 |
+| [x] 메타데이터 유지 |
+| [x] 청킹된 데이터 `/data/chunks/` 저장 |
 
 ---
 
-## 🧱 3. 청킹 (Chunking)
+## 3️⃣ 임베딩 생성
 
 | 체크리스트 | 상태 |
 |-----------|------|
-| [ ] Chunk size 결정 (권장: 300~1000 tokens) |
-| [ ] Overlap 설정 (권장: 20~30%) |
-| [ ] 문맥 단위 유지 (문장 완결성 보장) |
-| [ ] 메타데이터 유지 (출처, 페이지 정보 등) |
-| [ ] 청킹된 데이터 저장 (`/data/chunks/`) |
-
-> **TIP:** 코드/표는 작은 chunk, 문서는 큰 chunk 추천
+| [x] 텍스트 청크 → 벡터 임베딩 변환 |
+| [x] 임베딩 차원 확인 |
+| [x] 임베딩 + 원문 + 메타데이터 저장 (`/data/embeddings/`) |
 
 ---
 
-## 🔢 4. 임베딩 생성 (Embedding)
+## 4️⃣ 벡터 스토어 구축
 
 | 체크리스트 | 상태 |
 |-----------|------|
-| [ ] 임베딩 모델 선택 (예: `text-embedding-3-large`, `bge-m3` 등) |
-| [ ] 배치 단위 생성 & 오류 처리 |
-| [ ] 임베딩 차원 확인 |
-| [ ] 임베딩 + 원문 + 메타데이터 함께 저장 |
-| [ ] 임베딩 캐싱/재사용 전략 설정 |
-| [ ] 저장 형식 결정 (`parquet`, `json`, `pickle` 등) |
+| [ ] Vector DB 선택 (FAISS / Pinecone / Milvus 등) |
+| [ ] 벡터 삽입 및 검색 설정 (Top-k) |
+| [ ] 증분 업데이트 가능하도록 구성 |
 
-> **결과:** `/data/embeddings/` 내 저장
+> **결과:** 검색 가능한 벡터 DB 구성 완료
 
 ---
 
-## 📚 5. 벡터 스토어 구축 (Vector Store)
-
-| 체크리스트 | 상태 |
-|-----------|------|
-| [ ] Vector DB 선택 (FAISS / Pinecone / Weaviate / Milvus 등) |
-| [ ] 인덱스 유형 선택 (IVF, HNSW, PQ 등) |
-| [ ] 임베딩 차원 일치 검증 |
-| [ ] 메타데이터 키 정의 |
-| [ ] 검색 설정 (Top-k, Score threshold) |
-| [ ] CRUD & 증분 업데이트 방식 구현 |
-
-> **결과:** 검색 가능한 벡터스토어 구성 완료
-
----
-
-## 🔁 6. 쿼리 재작성 (Query Rewriting)
-
-| 체크리스트 | 상태 |
-|-----------|------|
-| [ ] 사용자 의도 추출 + Query Rewriting 적용 |
-| [ ] 모호한 질의 → 구체적 검색 쿼리 변환 |
-| [ ] 다중 질의 분해 (Sub-queries) |
-| [ ] Clarification prompt 적용 |
-| [ ] Vector DB 적합한 쿼리 포맷 정의 |
-| [ ] 쿼리 재작성 결과 로깅 |
-
-> 예시: `"요약해줘"` → `"문서 주요 개념 검색 후 요약"`
-
----
-
-## 🤖 7. RAG 에이전트 구현 (Agent + Retrieval + Generation)
+## 5️⃣ RAG 에이전트 구현 & 테스트
 
 | 체크리스트 | 상태 |
 |-----------|------|
 | [ ] Rewriter → Retriever → Generator Pipeline 구성 |
-| [ ] Context 조절 (max token, threshold filtering) |
+| [ ] Context 설정 (max token, score threshold) |
 | [ ] 시스템/도메인 프롬프트 작성 |
-| [ ] 출처(Citation) 자동 포함 |
-| [ ] Streaming 출력 (선택) |
-| [ ] 안전 필터링/차단 정책 설정 |
-| [ ] 성능 평가 (Precision@K, Recall@K 등) |
-
----
-
-## 📈 (Optional) 품질 평가 (QA Benchmark)
-
-| 체크리스트 | 상태 |
-|-----------|------|
-| [ ] Ground Truth Q&A 세트 구축 |
-| [ ] 정량 지표 선택 (Hit Rate, MRR 등) |
-| [ ] 수동 QA 평가 |
-| [ ] Chunk size / Top-k / Model 튜닝 |
-
----
-
+| [ ] 검색 후 생성 테스트 (샘플 질의) |
+| [ ] 성능/정확도 간단 검증 |
 
 
