@@ -23,7 +23,7 @@ class RAGContextHolder:
 context_holder = RAGContextHolder()
 
 # --- LLM init ---
-os.environ["GOOGLE_API_KEY"] = "AIzaSyBcz8WPGydT8R9Tj7M8BJ7_Ge9djK9sBzc"
+os.environ["GOOGLE_API_KEY"] = ""
 model = init_chat_model("google_genai:gemini-2.5-flash")
 
 # --- Web Search Tool ---
