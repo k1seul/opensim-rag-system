@@ -30,40 +30,40 @@ conda env create -f environment.yml
 
 아래 스크립트를 순서대로 실행하십시오.
 
-## 1. Collect Documentation 문서 데이터를 수집합니다.
+### 1. Collect Documentation
 
 ``` bash
 python run_collect.py
 ```
 
-## 2. Chunking 수집된 데이터를 청크 단위로 분할합니다.
+### 2. Chunking
 
 ``` bash
 chmod +x run_chunking.sh
 ./run_chunking.sh
 ```
 
-## 3. Preprocess Chunks 분할된 청크를 전처리합니다.
+### 3. Preprocess Chunks
 
 ```bash
 python run_preprocess.py
 ```
 
-## 4. Create Embeddings 청크를 임베딩 벡터로 변환합니다.
+### 4. Create Embeddings
 
 ```bash
 chmod +x run_embedding.sh
 ./run_embedding.sh
 ```
 
-## 5. Build Vectorstore 임베딩된 데이터를 벡터 저장소에 구축합니다.
+### 5. Build Vectorstore
 
 ```bash
 chmod +x run_vectorstore.sh
 ./run_vectorstore.sh
 ```
 
-## 6. (Optional) Analyze Contents 구축된 데이터 내용을 분석합니다.
+### 6. (Optional) Analyze Contents
 
 
 ```bash
