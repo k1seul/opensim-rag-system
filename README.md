@@ -23,6 +23,68 @@ OpenSim RAG 시스템을 실행하기 위해 별도의 conda 환경을 생성해
 conda env create -f environment.yml
 ```
 
+## 2. Build Vector Database
+데이터 처리 파이프라인(Chunking → Preprocess → Embedding → Vectorstore)을 수행하여 RAG 시스템에 필요한 벡터 데이터베이스를 구축합니다.
+
+프로젝트 디렉토리 구조 예시:
+
+Plaintext
+
+rag-agent/
+├── analyze_contents.py
+├── data/
+├── logs/
+├── run_chunking.sh
+├── run_collect.py
+├── run_embedding.sh
+├── run_preprocess.py
+├── run_vectorstore.sh
+├── src/
+└── start_rag.sh
+실행 단계:
+
+아래 스크립트를 순서대로 실행하십시오.
+
+## 1. Collect Documentation 문서 데이터를 수집합니다.
+
+``` bash
+python run_collect.py
+```
+
+## 2. Chunking 수집된 데이터를 청크 단위로 분할합니다.
+
+``` bash
+chmod +x run_chunking.sh
+./run_chunking.sh
+```
+
+## 3. Preprocess Chunks 분할된 청크를 전처리합니다.
+
+```bash
+python run_preprocess.py
+```
+
+## 4. Create Embeddings 청크를 임베딩 벡터로 변환합니다.
+
+```bash
+chmod +x run_embedding.sh
+./run_embedding.sh
+```
+
+## 5. Build Vectorstore 임베딩된 데이터를 벡터 저장소에 구축합니다.
+
+```bash
+chmod +x run_vectorstore.sh
+./run_vectorstore.sh
+```
+
+## 6. (Optional) Analyze Contents 구축된 데이터 내용을 분석합니다.
+
+
+```bash
+python analyze_contents.py
+```
+
 ## Run rag agent
 다음 코드로 rag agent 를 실행할 수 있습니다.
 
