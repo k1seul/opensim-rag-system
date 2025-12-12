@@ -26,21 +26,6 @@ conda env create -f environment.yml
 ## 2. Build Vector Database
 데이터 처리 파이프라인(Chunking → Preprocess → Embedding → Vectorstore)을 수행하여 RAG 시스템에 필요한 벡터 데이터베이스를 구축합니다.
 
-프로젝트 디렉토리 구조 예시:
-
-Plaintext
-
-rag-agent/
-├── analyze_contents.py
-├── data/
-├── logs/
-├── run_chunking.sh
-├── run_collect.py
-├── run_embedding.sh
-├── run_preprocess.py
-├── run_vectorstore.sh
-├── src/
-└── start_rag.sh
 실행 단계:
 
 아래 스크립트를 순서대로 실행하십시오.
