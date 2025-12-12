@@ -22,3 +22,12 @@ OpenSim RAG 시스템을 실행하기 위해 별도의 conda 환경을 생성해
 ``` bash
 conda env create -f environment.yml
 ```
+
+## Run rag agent
+다음 코드로 rag agent 를 실행할 수 있습니다.
+
+``` bash
+cd rag-agent
+chmod +x ./start_rag.sh
+./start_rag.sh
+```
