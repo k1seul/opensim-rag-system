@@ -1,12 +1,14 @@
 from pathlib import Path
 from .recursive_chunker import RecursiveChunker
+CHUNK_SIZE = 1000
+OVERLAP = 100
 
 def run():
     processed_dir = Path("data/processed")
     chunk_dir = Path("data/chunks")
     chunk_dir.mkdir(parents=True, exist_ok=True)
 
-    chunker = RecursiveChunker(chunk_size=1000, chunk_overlap=150)
+    chunker = RecursiveChunker(chunk_size=CHUNK_SIZE, chunk_overlap=OVERLAP)
     all_chunks = []
 
     # processed 디렉토리 내 모든 JSON 파일 처리
@@ -17,7 +19,7 @@ def run():
         all_chunks.extend(chunks)
 
     # 모든 chunk를 하나의 JSON 파일로 저장
-    output_file = chunk_dir / "chunked.json"
+    output_file = chunk_dir / f"chunked_{CHUNK_SIZE}_{OVERLAP}.json"
     chunker.save_chunks(all_chunks, output_file)
     print(f"[INFO] 총 {len(all_chunks)}개의 chunk 저장 완료: {output_file}")
 
