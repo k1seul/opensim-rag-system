@@ -1,0 +1,20 @@
+{"question":"OpenSim을 Python과 Matlab 환경에서 실행하기 위한 세팅을 알려줘."}
+{"question":"OpenSim에서 Inverse Kinematics를 수행했는데 knee flexion의 마커 에러만 지속적으로 크게 나온다. 이 경우 어떤 문제인지 어떻게 파악할 수 있는지 알려줘."}
+{"question":"OpenSim에서 보행보다 더 빠르고 가동 범위가 큰 동작의 muscle force를 분석하고자 할 때, 분석 과정에서 중요하게 고려해야 할 사항들에 대해 알려줘."}
+{"question":"Inverse Kinematics와 Inverse Dynamics 결과를 기반으로 보행 분석을 하고 있는데, 같은 보행 주기라도 trial마다 관절 모멘트의 크기가 크게 달라지는데, 이유가 무엇일지에 대해서 알려줘."}
+{"question":"OpenSim에서 JRA를 하기 위해 필요한 사전 작업에 대해서 알려줘."}
+{"question":"OpenSim에서 Computed Muscle Control이 단순하게 Inverse Dynamics 결과를 분배하는 방식이 아니라는 것을 forward dynamics 관점에서 설명해줘."}
+{"question":"OpenSim에서 SO와 CMC의 차이에 대해서 설명해줘."}
+{"question":"OpenSim에서 SO 결과에서 짧은 구간 동안 근육 activation에서 스파이크가 확인되는데, 이 현상이 수치적인 문제인지, 생체역학적 원인인지 구분하는 방법을 알려줘."}
+{"question":"OpenSim에서 CMC를 실행하면 시뮬레이션이 중간에 발산하거나, 근육 activiation이 1을 초과하려는 경향을 보이는데, 이 현상이 발생하는 대표적인 원인과 대응 방법을 알려줘."}
+{"question":"OpenSim에서 .c3d 파일을 .trc 파일로 변환하는 방법 알려줘."}
+{"question":"OpenSim에서 Scaling을 할 때 어떤 파일들이 필요한지 알려줘."}
+{"question":"OpenSim에서 Scaling 과정에서 전체적인 마커 에러는 작지만, 특정 관절 각도의 움직임이 실험 영상과 다르게 보이는 상황에서, 이런 현상이 발생하는 이유와 scaling 단계에서 어떻게 해결할 수 있을지 알려줘."}
+{"question":"OpenSim에서 reserve actuator의 역할에 대해 설명해줘."}
+{"question":"OpenSim에서 scaling error를 줄일 수 있는 방법을 알려줘."}
+{"question":"OpenSim에서 보행 동작의 residual force 및 moment 권장 허용 범위를 알려줘."}
+{"question":"OpenSim에서 기존 모델의 관절 자유도를 수정하는 방법을 알려줘."}
+{"question":"전체 OpenSim 보행 분석 결과를 해석할 때, 시뮬레이션 결과의 신뢰성을 판단하기 위한 최소한의 점검사항들을 단계별(IK, ID, SO/CMC, JRA)로 정리해줘."}
+{"question":"Opensim MocoTrack과 MocoInverse의 차이를 알려줘."}
+{"question":"OpenSim MocoInverse가 기존 Inverse Dynamics, Static Optimization 접근과 무엇이 다른지, 최적화 관점에서 설명해줘."}
+{"question":"OpenSim에서 널리 사용되는 Rajagopal model에 대한 레퍼런스를 찾아서 모델에 대한 정보를 정리해줘."}
